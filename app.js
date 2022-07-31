@@ -1,11 +1,13 @@
 async function init() {
     // Read data from csv
     await d3.csv("https://flunky.github.io/cars2017.csv", d3.autoType).then(function(data) {
-
+            
         // var svg = d3.select("svg")
         var svg = d3.select("#my_dataviz").append("svg")
                 .attr("width", 1500)
                 .attr("height", 620)
+                .style('background-color', 'white')
+                
         // Set local variables for margin, width, and height
         var margin = 60
         var width = 1500 - 2*margin
@@ -54,7 +56,7 @@ async function init() {
             }
 
         const mouseover = function(event,d){       
-            d3.select(this)        
+            d3.select(this)         
                 .style("fill", color(d.Fuel))
                 .attr("r", 7)
 
@@ -141,8 +143,38 @@ async function init() {
         d3.select("#selectButton").on("change", function() {
             // recover the option that has been chosen
             let selectedOption = d3.select(this).property("value")
-            d3.select('svg').selectAll(".dot").remove();
+            d3.select('svg').selectAll(".dot")
+                .remove();
             // run the updateChart function with this selected option
+            if (selectedOption == 0) {
+                d3.select("p")
+                .html("For engine cylinder equals 0, all of them are eletrical cars. The Average city MPG and Average Highway MPG are relatively high comparing to other engine cylinders. ")
+                .style('color', 'darkRed')
+            } else if (selectedOption == 4) {
+                d3.select("p")
+                .html("For engine cylinder equals 4, most of them are gasoline cars, and a few of them are diesel cars. The Average city and Highway MPG are at the middle comparing to other engine cylinders.")
+                .style('color', 'darkRed')
+            } else if (selectedOption == 6) {
+                d3.select("p")
+                .html("For engine cylinder equals 6, it consists of gasoline and diesel cars, and a few of them are diesel cars. The Average city MPG and Average Highway MPG are lower than 0 or 4 engine cylinders.")
+                .style('color', 'darkRed')
+            } else if (selectedOption == 8) {
+                d3.select("p")
+                .html("For engine cylinder equals 8, all of them are gasoline cars. The Average city MPG and Average Highway MPG is significantly lower than 0, 4, 6 engine cylinder cars. ")
+                .style('color', 'darkRed')
+            } else if (selectedOption == 10) {
+                d3.select("p")
+                .html("For engine cylinder equals 10, all of them are gasoline cars. The Average city MPG and Average Highway MPG are very low. These cars are not recommended in terms of fuel economy. ")
+                .style('color', 'darkRed')
+            } else if (selectedOption == 12) {
+                d3.select("p")
+                .html("For engine cylinder equals 12, all of them are gasoline cars. The Average city MPG and Average Highway MPG are the lowest. These cars are not recommended in terms of fuel economy.")
+                .style('color', 'darkRed')
+            } else {
+                d3.select("p")
+                .html("Below is an overall scatter plot containing all engine cylinders.")
+                .style('color', 'black')
+            }
             update(data, selectedOption)
         })
 
