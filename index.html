@@ -6,15 +6,17 @@
 
         <title>Narrative Visualization Project</title>
         
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3.v6.js"></script>
         <script src="app.js"></script>
     </head>
 
-    <body onload="init()">
+    <body style="background-color: #BCEBF5;" onload="init()" >
         <h1>2017 Automobile Data for Fuel Economy</h1>
 
-        <svg width=1400 height=800></svg>
-        
+        <label for="cars">To examine a specific engine cylinder, please select:</label>
+        <select id="selectButton"></select>
+        <br><br>
+        <div id="my_dataviz" style="background-color:white;"></div>
+
     </body>
 </html>
