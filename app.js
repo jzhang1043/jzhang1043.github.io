@@ -54,7 +54,7 @@ async function init() {
             }
 
         const mouseover = function(event,d){       
-            d3.select(this)
+            d3.select(this)        
                 .style("fill", color(d.Fuel))
                 .attr("r", 7)
 
@@ -65,6 +65,8 @@ async function init() {
 
         const mouseleave = function(event,d){
             d3.select(this)
+                .transition()
+                .duration(100)
                 .style("fill", d => color(d.Fuel))
                 .attr("r", 4 )
             
@@ -108,9 +110,6 @@ async function init() {
 
         // A function that update the chart
         function update(data, selectedGroup) {
-            
-            
-
             filteredData = data.filter(function(row) {
                 if (selectedGroup == "All"){
                     return row;
